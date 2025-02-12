@@ -31,7 +31,11 @@ const FeedbackSurveyContext = React.createContext<
 export const useFeedbackSurvey = (selector: string): FeedbackSurveyHook | undefined => {
   const context = React.useContext(FeedbackSurveyContext)
   const survey = context?.surveys.find(
-    (survey) => survey.type === 'widget' && survey.appearance?.widgetSelector === selector
+    (survey) =>
+      survey.type === 'widget' &&
+      survey.appearance?.widgetSelector === selector &&
+      survey.start_date !== null &&
+      survey.end_date === null
   )
   if (!context || !survey) {
     return undefined
